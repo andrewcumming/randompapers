@@ -6,8 +6,7 @@ import time
 import glob
 from feedgen.feed import FeedGenerator
 
-api_key='5lmNWYhI74JW6ZYD2nXZ2J4XnSFDMc626a0GlcAd'
-#www_dir = '/var/www/html/randompapers.net/public_html/'
+api_key=''
 www_dir = './'
 
 # Rename the index.html file using its creation date
