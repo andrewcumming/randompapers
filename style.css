@@ -1,0 +1,64 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
+
+* {
+  font-family: 'Lato', Helvetica, sans-serif;
+  color: #333447;
+  line-height: 1.5;
+}
+
+body {
+	font-weight: 300;
+	margin: 0 auto;
+	/*margin-top: 2em;*/
+	margin-bottom: 2em;
+	width: 100%
+}
+
+.container {
+	width: 70%;
+	margin: 0 auto;
+}
+
+@media only screen and (max-width: 60em) {
+	.container {
+		width: 90%;
+		margin: 0 auto;
+	}
+}
+
+.container h4 {
+	font-size: 1.5em;
+}
+
+.container a {
+	font-weight: 400;
+}
+
+
+.heading {
+	text-align: center;
+	width: 100%;
+	height: 15em;
+	padding: 0 auto;
+	background: #5DADE2;
+	position: relative;
+	margin: 0 auto;
+	background-image: url("15-066.png");
+}
+
+.heading image {
+	content:url(15-066.png);
+	overflow:hidden;
+}
+
+.heading h1 {
+	font-size: 3em;
+	color: #ffffff;
+	margin: 0;
+	position: absolute;
+	top: 60%;
+	bottom: 40%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+}
