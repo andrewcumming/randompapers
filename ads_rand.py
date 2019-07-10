@@ -66,8 +66,15 @@ choice_count = 1
 for i in choice:
 	doc = docs[i]
 	print('<P><font size="+1">'+str(choice_count)+'. <a href="http://adsabs.harvard.edu/abs/'+doc['bibcode']+'">'+doc['title'][0]+'</a>',file=fp)
-	for name in doc['author']:
-		print(name+', ',file=fp)
+	authors = doc['author']
+	num_authors = len(authors)
+	name = authors[0]
+	print(name.split(',')[0], file=fp)
+	if num_authors > 2:
+		print(' et al. ', file=fp)
+	if num_authors == 2:
+		name2 = authors[1]
+		print(' &amp; ' + name2.split(',')[0], file=fp)
 	print(str(year)+', '+doc['pub'],file=fp)
 	print('</font></p>',file=fp)
 	# add an entry to the feed
@@ -105,7 +112,8 @@ for fname in file_list:
 		print('<a href="'+fname+'">'+fname.replace("_",".")[:-5]+'</a> ',file=fp)
 
 print('''<p><br>
-Image credit: <a href="https://www.nasa.gov/image-feature/celestial-fireworks">NASA/HST</a>
+Image credit: <a href="https://www.nasa.gov/image-feature/celestial-fireworks">NASA/HST</a><br>
+Code: <a href="https://github.com/andrewcumming/randompapers">GitHub</a>
 </p>''',file=fp)
 print("</div></body></html>",file=fp)
 
