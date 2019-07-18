@@ -65,7 +65,7 @@ docs = out["response"]["docs"]
 choice_count = 1
 for i in choice:
 	doc = docs[i]
-	print('<P><font size="+1">'+str(choice_count)+'. <a href="http://adsabs.harvard.edu/abs/'+doc['bibcode']+'">'+doc['title'][0]+'</a>',file=fp)
+	print('<P><font size="+1">'+str(choice_count)+'. <a href="http://ui.adsabs.harvard.edu/abs/'+doc['bibcode']+'">'+doc['title'][0]+'</a>',file=fp)
 	authors = doc['author']
 	num_authors = len(authors)
 	name = authors[0]
@@ -80,7 +80,7 @@ for i in choice:
 	# add an entry to the feed
 	fe = fg.add_entry()
 	fe.title(doc['title'][0])
-	fe.link( href='http://adsabs.harvard.edu/abs/'+doc['bibcode'])
+	fe.link( href='http://ui.adsabs.harvard.edu/abs/'+doc['bibcode'])
 	namestring=''
 	for name in doc['author']:
 		namestring = namestring + name + ', '
