@@ -113,7 +113,8 @@ for fname in file_list:
 
 print('''<p><br>
 Image credit: <a href="https://www.nasa.gov/image-feature/celestial-fireworks">NASA/HST</a><br>
-Code: <a href="https://github.com/andrewcumming/randompapers">GitHub</a>
+Code: <a href="https://github.com/andrewcumming/randompapers">GitHub</a><br>
+<a href="feed.xml">RSS</a>
 </p>''',file=fp)
 print("</div></body></html>",file=fp)
 
