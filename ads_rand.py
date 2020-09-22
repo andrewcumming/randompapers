@@ -51,9 +51,9 @@ if lastmonth == 0:
 pubdate = '%4d-%02d' % (year, lastmonth)
 
 # make the request
-r=requests.get('https://api.adsabs.harvard.edu/v1/search/query?q=*&fq=pubdate:'+pubdate+'&rows=2000&fq=bibstem:(MNRAS OR ApJ OR A%26A OR AJ)&fq=database:astronomy&fl=bibcode,author,title,pub,abstract',headers={'Authorization' : 'Bearer:'+api_key})
-out = r.json()
+r=requests.get('https://api.adsabs.harvard.edu/v1/search/query?q=*:*&fq=pubdate:'+pubdate+'&rows=2000&fq=bibstem:(MNRAS OR ApJ OR A%26A OR AJ)&fq=database:astronomy&fl=bibcode,author,title,pub,abstract',headers={'Authorization' : 'Bearer:'+api_key})
 print('Response: ', r.status_code)
+out = r.json()
 
 # choose random numbers
 num_papers=out["response"]["numFound"]
