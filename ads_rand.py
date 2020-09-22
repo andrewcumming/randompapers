@@ -95,8 +95,8 @@ fg.rss_file(www_dir+'feed.xml')
 
 # About
 print("<h4>About Random Papers</h4>",file=fp)
-print('''<p>We meet every Monday at 2pm at the <a href="http://msi.mcgill.ca/">McGill Space Institute</a> to discuss 5 random astrophysics papers.</p>
-<p>The goal of Random Papers is to gain a broad view of current astrophysics research. Each week we run a script to choose 5 random papers published in the last month in refereed astrophysics journals. This gives a different slice of the literature than the typical astro-ph discussion, with papers from outside our own research areas or those that might not otherwise be chosen for discussion.</p>
+print('''<p>We meet every second Monday at noon at the <a href="http://msi.mcgill.ca/">McGill Space Institute</a> to discuss 5 random astrophysics papers.</p>
+<p>The goal of Random Papers is to gain a broad view of current astrophysics research. For each meeting, we run a script to choose 5 random papers published in the last month in refereed astrophysics journals. This gives a different slice of the literature than the typical astro-ph discussion, with papers from outside our own research areas or those that might not otherwise be chosen for discussion.</p>
 <p>Rather than reading each paper in depth, the goal is to focus on the big picture, with questions such as: How would we summarize the paper in a few sentences? What are the key figures in the paper? What analysis methods are used? Why is this paper being written, and Why now?
 </p>
 ''', file=fp)
