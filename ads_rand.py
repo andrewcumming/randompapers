@@ -9,6 +9,19 @@ from feedgen.feed import FeedGenerator
 api_key=''
 www_dir = './'
 
+# check to see if it's been more than 10 days since the last time
+try:
+    st = os.stat(www_dir+'index.html')
+except:
+    st = 0
+
+# turned this off in the next line because we're switching to weekly (2021 May 4)
+if (time.time()-st.st_mtime)<(0.0*24*3600):
+    print("Too soon!")
+    exit()
+
+print("Proceeding")
+
 # Rename the index.html file using its creation date
 try:
 	previous_fname = time.strftime("%Y_%m_%d.html",time.localtime(os.path.getmtime(www_dir+'index.html')))
@@ -37,7 +50,7 @@ print("<h4>This week's papers</h4>",file=fp)
 fg = FeedGenerator()
 fg.title('Random Papers')
 fg.link( href='http://randompapers.net' )
-fg.description('5 random papers chosen from the astrophysics literature')
+fg.description('Random papers chosen from the astrophysics literature')
 
 # Work out the month and year to search
 now = datetime.now()
@@ -57,7 +70,7 @@ out = r.json()
 
 # choose random numbers
 num_papers=out["response"]["numFound"]
-choice = np.random.choice(num_papers,5,replace=False)
+choice = np.random.choice(num_papers,3,replace=False)
 print("num_papers, choice=",num_papers,choice)
 
 # print out the info about the chosen papers
@@ -65,6 +78,7 @@ docs = out["response"]["docs"]
 choice_count = 1
 for i in choice:
 	doc = docs[i]
+	print(doc)
 	print('<P><font size="+1">'+str(choice_count)+'. <a href="http://ui.adsabs.harvard.edu/abs/'+doc['bibcode']+'">'+doc['title'][0]+'</a>',file=fp)
 	authors = doc['author']
 	num_authors = len(authors)
@@ -84,7 +98,10 @@ for i in choice:
 	namestring=''
 	for name in doc['author']:
 		namestring = namestring + name + ', '
-	fe.content(namestring + doc['pub'] + '<br><br>' + doc['abstract'])
+	if 'abstract' in doc:
+		fe.content(namestring + doc['pub'] + '<br><br>' + doc['abstract'])
+	else:
+		fe.content(namestring + doc['pub'])
 	choice_count+=1
 
 # summary information
@@ -95,14 +112,15 @@ fg.rss_file(www_dir+'feed.xml')
 
 # About
 print("<h4>About Random Papers</h4>",file=fp)
-print('''<p>We meet every second Monday at noon at the <a href="http://msi.mcgill.ca/">McGill Space Institute</a> to discuss 5 random astrophysics papers.</p>
-<p>The goal of Random Papers is to gain a broad view of current astrophysics research. For each meeting, we run a script to choose 5 random papers published in the last month in refereed astrophysics journals. This gives a different slice of the literature than the typical astro-ph discussion, with papers from outside our own research areas or those that might not otherwise be chosen for discussion.</p>
+print('''<p>Random Papers is a weekly discussion group held at the <a href="http://msi.mcgill.ca/">McGill Space Institute</a>.</p>
+<p>The goal of Random Papers is to gain a broad view of current astrophysics research. For each meeting, we run a script to choose a random selection of papers published in the last month in refereed astrophysics journals. This gives a different slice of the literature than the typical astro-ph discussion, with papers from outside our own research areas or those that might not otherwise be chosen for discussion.</p>
 <p>Rather than reading each paper in depth, the goal is to focus on the big picture, with questions such as: How would we summarize the paper in a few sentences? What are the key figures in the paper? What analysis methods are used? Why is this paper being written, and Why now?
 </p>
 ''', file=fp)
 
 # make a list of previous random papers
-print("<h4>Previous random papers</h4>",file=fp)
+print('''<br><details closed><summary>Previous Random Papers</summary>
+''',file=fp)
 
 file_list = glob.glob(www_dir+'*.html')
 file_list = [os.path.basename(file) for file in file_list]
@@ -110,6 +128,8 @@ file_list.sort(reverse=True)
 for fname in file_list:
 	if fname!='index.html':
 		print('<a href="'+fname+'">'+fname.replace("_",".")[:-5]+'</a> ',file=fp)
+
+print("</details>",file=fp)
 
 print('''<p><br>
 Image credit: <a href="https://www.nasa.gov/image-feature/celestial-fireworks">NASA/HST</a><br>
